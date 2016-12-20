@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FunNote</string>
+    <string name="action_settings">Settings</string>
+    <string name="normal_notes">普通模式</string>
+    <string name="funchat_notes">有聊模式</string>
+    <string name="others">其他</string>
+    <string name="settings">设置</string>
+    <string name="about_us">关于我们</string>
+    <string name="home">主页</string>
+    <string name="mode_settings">模式设置</string>
+</resources>

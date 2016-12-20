@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/mode_settings">
+        <menu>
+            <item
+                android:id="@+id/normal_notes"
+                android:title="@string/normal_notes"
+                />
+
+            <item
+                android:id="@+id/funchat_notes"
+                android:title="@string/funchat_notes" />
+        </menu>
+    </item>
+    <item android:title="@string/others">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/about_us"
+                android:title="@string/about_us" />
+        </menu>
+    </item>
+
+</menu>
