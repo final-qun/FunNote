@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,26 +26,47 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     public DrawerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         DrawerViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
         switch (viewType) {
             case TYPE_DIVIDER:
-                view = inflater.inflate(R.layout.drawer_divider,null);
+                viewHolder = new DrawerViewHolder(inflater.inflate(R.layout.drawer_divider,null));
                 break;
             case TYPE_HEADER:
-                view = inflater.inflate(R.layout.drawer_header,null);
+                viewHolder = new HeaderViewHolder(inflater.inflate(R.layout.drawer_header,null));
                 break;
             case TYPE_MENU:
-                view = inflater.inflate(R.layout.drawer_menu,null);
+                viewHolder = new MenuViewHolder(inflater.inflate(R.layout.drawer_menu,null));
                 break;
         }
-        return null;
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(DrawerViewHolder holder, int position) {
+        final DrawerItem drawerItem = datas.get(position);
+        if (holder instanceof MenuViewHolder) {
+            final MenuViewHolder menuViewHolder = (MenuViewHolder) holder;
+            MenuDrawerItem menuDrawerItem = (MenuDrawerItem) drawerItem;
+            menuViewHolder.image.setBackgroundResource(menuDrawerItem.imageRes);
+            menuViewHolder.text.setText(menuDrawerItem.textRes);
+            menuViewHolder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onMenuItemClick(menuViewHolder);
+                }
+            });
+        } else if (holder instanceof HeaderViewHolder) {
 
+        }
     }
 
+    public OnMenuItemClickListener listener;
+
+    public void setOnMenuItemClickListener(OnMenuItemClickListener listener) {
+        listener = listener;
+    }
+    public interface OnMenuItemClickListener {
+        void onMenuItemClick(MenuViewHolder menuViewHolder);
+    }
     @Override
     public int getItemCount() {
         return 0;
@@ -57,8 +79,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
     public class DrawerItem {
         public int type;
-        public ImageView image;
-        public TextView textView;
+    }
+
+    public class MenuDrawerItem extends DrawerItem {
+        public int imageRes;
+        public int textRes;
     }
 
     public class DrawerViewHolder extends RecyclerView.ViewHolder {
